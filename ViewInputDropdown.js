@@ -61,7 +61,7 @@ class ViewInputDropdown extends React.Component {
 		return (
 			<Item style={MENUSTYLE}>
 				<Right>
-					<Button transparent style={{ justifyContent: 'flex-start',alignSelf:'center' }} onPress={this.showMenu}>
+					<Button transparent style={{ width:'100%',justifyContent: 'center', alignSelf: 'center' }} onPress={this.showMenu}>
 						<Text style={TEXTSTYLE} >{this.props.field.options[this.state.value]}</Text>
 					</Button>
 				</Right>
