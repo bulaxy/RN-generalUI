@@ -4,13 +4,21 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
 //https://aboutreact.com/react-native-popup-menu/
 
-//optional
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import { Title, Icon } from 'native-base'
+import { Button, Icon, Item, Right } from 'native-base'
 
 //Usage <ViewInputDropdown iconName=string iconType=string field={{ title: string, options: array, value:integer  }} />
-
+const MENUSTYLE = {
+	marginRight: 10,
+	width: 200,
+	flex: 1,
+	marginBottom:8,
+	marginTop:8
+}
+const TEXTSTYLE = {
+	fontSize:18,
+}
 class ViewInputDropdown extends React.Component {
 
 	constructor(props) {
@@ -37,6 +45,7 @@ class ViewInputDropdown extends React.Component {
 
 	render() {
 		if (typeof this.props.iconName == "undefined") {
+			var icon = [<Icon onPress={this.showMenu} style={{ Color: 'black' }} name="arrow-down" />]
 		} else {
 			var icon = [<Icon onPress={this.showMenu} style={{ Color: 'black' }} type={this.props.iconType} name={this.props.iconName} />]
 		}
@@ -50,20 +59,22 @@ class ViewInputDropdown extends React.Component {
 			)
 		}
 		return (
-			<View style={this.props.menustyle}>
+			<Item style={MENUSTYLE}>
+				<Right>
+					<Button transparent style={{ justifyContent: 'flex-start',alignSelf:'center' }} onPress={this.showMenu}>
+						<Text style={TEXTSTYLE} >{this.props.field.options[this.state.value]}</Text>
+					</Button>
+				</Right>
 				<Menu
 					ref={this.setMenuRef}
 					button={
 						<TouchableOpacity onPress={this.showMenu}>
-							<View>
-								<Text>{(this.state.value == null) ? null : this.props.field.options[this.state.value]}</Text>
-								{icon}
-							</View>
+							{icon}
 						</TouchableOpacity>
 					}>
 					{menuItems}
 				</Menu>
-			</View>
+			</Item>
 		);
 	}
 }
