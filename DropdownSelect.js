@@ -9,21 +9,22 @@ import MultiSelect from 'react-native-multiple-select';
 		selectName = ""
 	 />
 */
-export default class DropdownSelect extends Component {
+export default class DropdownMultiSelect extends Component {
 	state = {
 		selectedItems: [],
 		selectedText: "Select " + this.props.selectName
 	};
 	onSelectedItemsChange = selectedItems => {
+		console.log(selectedItems)
 		var selectedText = ""
-		for (var i = 0; i < selectedItems.length; i++) {
-			for (var j = 0; j < items.length; j++) {
-				if (this.props.items[j].id == selectedItems[i]) {
-					selectedText = selectedText + this.props.items[j].name + ", "
+		selectedItems.forEach(item => {
+			for (var i = 0; i < this.props.items.length; i++) {
+				if (this.props.items[i][this.props.uniqueKey] == item) {
+					selectedText = selectedText + this.props.items[i][this.props.displayKey] + ", "
 					break;
 				}
 			}
-		}
+		});
 		selectedText = selectedText.substring(0, selectedText.length - 2) //Trim last ", "
 		this.setState({
 			selectedItems: selectedItems,
