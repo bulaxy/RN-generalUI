@@ -6,3 +6,4 @@ Might slowly add more as time goes
 ## Currently exist
 1. Dropdown Menu
 2. Loading Spinner
+3. Dropdown Multi-select
